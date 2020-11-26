@@ -28,7 +28,7 @@ class ElevatorView extends BasicViewModel {
         const { status, floorPosition } = this._elevator;
 
         this._box.dataset.status = `${status}`;
-        this._box.style.bottom = `${floorPosition * 100}px`;
+        this._box.style.bottom = `${(floorPosition - 1) * 100}px`;
     }
 }
 

@@ -13,7 +13,7 @@ enum ElevatorStatus {
 
 interface TaskInterface {
     type: TaskType,
-    move: -1 | 0 | 3
+    move: -1 | 0 | 1
 }
 
 class Elevator extends BasicDataModel {
@@ -23,10 +23,6 @@ class Elevator extends BasicDataModel {
 
     constructor(index: number) {
         super(index);
-
-        setTimeout(() => {
-            this.status = ElevatorStatus.moving;
-        }, 4000);
     }
 
     get index(): number {
