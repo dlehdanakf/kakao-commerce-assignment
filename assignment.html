@@ -6,9 +6,131 @@
         <meta name="author" content="이동현" />
         <meta name="description" content="카카오커머스 프론트엔드 개발자 채용 과제" />
         <link rel="stylesheet" href="dist/style.css" />
+        <link rel="stylesheet" type="text/css" crossorigin="anonymous" href="http://meta-kage.kakaocdn.net/dn/osa/blog/assets/fonts/Kakao.css"/>
         <script src="dist/script.js"></script>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>과제 1. 화물 엘리베이터</h1>
+        <section id="set-variables">
+            <h3>STEP 1. 층 수와 화물 엘리베이터 개수를 입력해주세요.</h3>
+            <form name="variable_form">
+                <div class="form-group">
+                    <label for="variable-form-floor">전체 층 수</label>
+                    <input type="number" name="floor" value="5" max="100" id="variable-form-floor" />
+                </div>
+                <div class="form-group">
+                    <label for="variable-form-elevator">전체 엘리베이터 개수</label>
+                    <input type="number" name="elevator" value="4" max="100" id="variable-form-elevator" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="variable-form-submit">제출</button>
+                </div>
+                <div class="form-group">
+                    <button type="reset" id="variable-form-reset" disabled>초기화</button>
+                </div>
+            </form>
+        </section>
+        <section id="play-simulation">
+            <h3>STEP 2. 각 층의 호출버튼을 눌러 엘리베이터를 호출해주세요.</h3>
+            <div id="application-root">
+                <div id="floor-list">
+                    <div class="floor-item">
+                        <h4>6 Floor</h4>
+                        <div>
+                            <button type="button">호출</button>
+                            <input type="text" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="floor-item">
+                        <h4>5 Floor</h4>
+                        <div>
+                            <button type="button">호출</button>
+                            <input type="text" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="floor-item">
+                        <h4>4 Floor</h4>
+                        <div>
+                            <button type="button">호출</button>
+                            <input type="text" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="floor-item">
+                        <h4>3 Floor</h4>
+                        <div>
+                            <button type="button">호출</button>
+                            <input type="text" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="floor-item">
+                        <h4>2 Floor</h4>
+                        <div>
+                            <button type="button">호출</button>
+                            <input type="text" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="floor-item">
+                        <h4>1 Floor</h4>
+                        <div>
+                            <button type="button">호출</button>
+                            <input type="text" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+                <div id="elevator-list">
+                    <div class="elevator-item">
+                        <div class="elevator" data-status="pending"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator" data-status="moving"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator" data-status="opened"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                    <div class="elevator-item">
+                        <div class="elevator"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </body>
 </html>
