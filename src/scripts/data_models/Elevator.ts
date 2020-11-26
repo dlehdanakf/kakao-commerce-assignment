@@ -23,6 +23,10 @@ class Elevator extends BasicDataModel {
 
     constructor(index: number) {
         super(index);
+
+        setTimeout(() => {
+            this.status = ElevatorStatus.moving;
+        }, 4000);
     }
 
     get index(): number {
