@@ -6,7 +6,7 @@ enum TaskType {
 
 interface TaskInterface {
     type: TaskType,
-    time: 1 | 3
+    move: -1 | 0 | 3
 }
 
 class Elevator {
