@@ -1,18 +1,16 @@
+import BasicViewModel from "./BasicViewModel";
 import Floor from "./../data_models/Floor";
 
-class FloorView {
+class FloorView extends BasicViewModel {
     protected _floor: Floor;
-    protected _element: HTMLElement;
-    protected _button: HTMLElement;
-    protected _input: HTMLElement;
+    protected _button: HTMLButtonElement;
+    protected _input: HTMLInputElement;
 
     public constructor(floor: Floor) {
+        super(floor);
+
         this._floor = floor;
         this.constructElement();
-    }
-
-    get element(): HTMLElement {
-        return this._element;
     }
 
     protected constructElement() {
@@ -24,15 +22,21 @@ class FloorView {
         this._input  = this._element.querySelector(`input`);
     }
     protected getHTML(): string {
-        const { index } = this._floor;
+        const { index, assignedElevatorIndex } = this._floor;
 
         return (`
             <h4>${index} Floor</h4>
             <div>
                 <button type="button">호출</button>
-                <input type="text" readonly />
+                <input type="text" value="${assignedElevatorIndex}" readonly />
             </div>
         `);
+    }
+    public update(): void {
+        const { isActive, assignedElevatorIndex } = this._floor;
+
+        this._button.disabled = !!isActive;
+        this._input.value = assignedElevatorIndex;
     }
 }
 
