@@ -1,6 +1,11 @@
 import Floor from "../data_models/Floor";
 import Elevator from "../data_models/Elevator";
 
+interface ElevatorTimeInterface {
+    elevator: Elevator,
+    time: number
+}
+
 export const isCallInvalid = (floor: Floor, elevatorList: Array<Elevator>) => {
     /**
      *  floor === undefined    : 전달받은 floor 파라미터가 유효하지 않은 객체일 경우
@@ -17,12 +22,21 @@ export const isCallInvalid = (floor: Floor, elevatorList: Array<Elevator>) => {
     );
 };
 export const pickFastestComingElevator = (floor: Floor, elevatorList: Array<Elevator>): Elevator => {
-    /**
-     *  TODO: 임시로 가장 빠른 엘리베이터를 탐색하지 않고 elevatorList 배열 속 첫 번째 엘리베이터 객체를 반환한다.
-     *        일단 Elevator 한 객체에 대해 TaskQueue 기능과 ViewModel 연동이 모두 정상 작동하는 것을 체킹한뒤 구현할 예정
-     */
+    const [ elevator ] = elevatorList
+        .map((elevator: Elevator): ElevatorTimeInterface => {
+            /* Elevator가 Floor에 도착하는 시간 = Task를 모두 처리하는데 걸리는 시간 + 최종 Floor에서 호출한 Floor까지 가는데 걸리는 시간 */
+            /* Elevator가 올라가던 내려가던 이동하는 거리는 절댓값 */
+            const moveDistance = Math.abs(floor.index - elevator.finalDestinationFloorIndex);
+            const time = elevator.timeToCompleteTask + moveDistance;
 
-    const [ elevator ] = elevatorList;
+            return {
+                elevator,
+                time
+            };
+        })
+        .sort((a: ElevatorTimeInterface, b: ElevatorTimeInterface) => a.time - b.time)
+        .map((elevatorTime: ElevatorTimeInterface): Elevator => elevatorTime.elevator);
+
     return elevator;
 };
 export const generate_callElevator = (floorList: Array<Floor>, elevatorList: Array<Elevator>): (floorIndex: number) => void => {
