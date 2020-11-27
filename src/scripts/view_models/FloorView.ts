@@ -46,6 +46,12 @@ class FloorView extends BasicViewModel {
         this._button.disabled = isElevatorComing;
         this._input.value = assignedElevatorIndex;
     }
+
+    public destruct() {
+        super.destruct();
+
+        this._floor = undefined;
+    }
 }
 
 export default FloorView;

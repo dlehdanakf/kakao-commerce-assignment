@@ -20,4 +20,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
         callElevator: generate_callElevator(floorList, elevatorList),
         isFloorCallable: generate_isFloorCallable(floorList, elevatorList)
     };
+
+    setTimeout(() => {
+        floorList.forEach(e => e.destruct());
+        elevatorList.forEach(e => e.destruct());
+    }, 4000);
 });

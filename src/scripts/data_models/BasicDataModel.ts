@@ -20,6 +20,11 @@ abstract class BasicDataModel {
     get index(): number {
         return this._index;
     }
+
+    public destruct() {
+        this._viewModel.destruct();
+        this._viewModel = undefined;
+    }
 }
 
 export default BasicDataModel;

@@ -120,6 +120,13 @@ class Elevator extends BasicDataModel {
         this.currentFloorIndex = this.currentFloorIndex + task.move;
         this._timer = setTimeout(() => this.doTask(), 1000);
     }
+
+    public destruct() {
+        super.destruct();
+
+        clearTimeout(this._timer);
+        this._timer = undefined;
+    }
 }
 
 export default Elevator;

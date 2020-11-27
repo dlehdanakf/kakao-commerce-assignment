@@ -30,6 +30,12 @@ class ElevatorView extends BasicViewModel {
         this._box.dataset.status = `${status}`;
         this._box.style.transform = `translate(0, -${(currentFloorIndex - 1) * 100}px)`;
     }
+
+    destruct() {
+        super.destruct();
+
+        this._elevator = undefined;
+    }
 }
 
 export default ElevatorView;

@@ -14,6 +14,10 @@ abstract class BasicViewModel {
     get element() {
         return this._element;
     }
+
+    public destruct() {
+        this._element.remove();
+    }
 }
 
 export default BasicViewModel;
