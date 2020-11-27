@@ -20,6 +20,13 @@ class FloorView extends BasicViewModel {
 
         this._button = this._element.querySelector(`button`);
         this._input  = this._element.querySelector(`input`);
+
+        this._button.addEventListener(`click`, () => {
+            const { index } = this._floor;
+            if(window.hasOwnProperty(`elevator`)) {
+                window.elevator.callElevator(index);
+            }
+        });
     }
     protected getHTML(): string {
         const { index, assignedElevatorIndex } = this._floor;
@@ -33,9 +40,10 @@ class FloorView extends BasicViewModel {
         `);
     }
     public update(): void {
-        const { isActive, assignedElevatorIndex } = this._floor;
+        const isActive: boolean = this._floor.isActive;
+        const assignedElevatorIndex = this._floor.assignedElevatorIndex;
 
-        this._button.disabled = !!isActive;
+        this._button.disabled = isActive;
         this._input.value = assignedElevatorIndex;
     }
 }
