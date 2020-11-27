@@ -8,7 +8,7 @@ if (!('remove' in Element.prototype)) {
         }
     };
 }
-/**  */
+/** ----------------------------------------------------------------------  */
 
 import { initializeApplicationModels } from "./controllers/initialize_application";
 import { generate_callElevator } from "./controllers/call_elevator";
