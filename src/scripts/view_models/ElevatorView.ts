@@ -20,15 +20,15 @@ class ElevatorView extends BasicViewModel {
         this._box = this._element.querySelector(`div.elevator`);
     }
     protected getHTML(): string {
-        const { status } = this._elevator;
+        const { index, status } = this._elevator;
 
-        return (`<div class="elevator" data-status="${status}"></div>`);
+        return (`<div class="elevator" data-index="${index}" data-status="${status}"></div>`);
     }
     public update(): void {
         const { status, currentFloorIndex } = this._elevator;
 
         this._box.dataset.status = `${status}`;
-        this._box.style.bottom = `${(currentFloorIndex - 1) * 100}px`;
+        this._box.style.transform = `translate(0, -${(currentFloorIndex - 1) * 100}px)`;
     }
 }
 

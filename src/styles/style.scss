@@ -103,7 +103,7 @@ h3 {
       bottom: 0;
       left: 0;
       margin-top: -1px;
-      transition: bottom 1s linear;
+      transition: transform 1s linear;
 
       &[data-status="pending"]::before {
         background-color: $gray_background;
@@ -125,7 +125,12 @@ h3 {
       }
 
       &::before {
-        content: '';
+        content: attr(data-index);
+        font-size: 16px;
+        padding: 10px;
+        color: $black;
+        font-family: "Arial", sans-serif;
+        font-weight: bold;
         display: block;
         width: 90px;
         height: 90px;
@@ -138,7 +143,7 @@ h3 {
       &::after {
         content: '대기 중';
         position: absolute;
-        top: 16px;
+        bottom: 16px;
         left: 16px;
         font-size: 16px;
         font-family: "Arial", sans-serif;
