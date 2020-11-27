@@ -1,3 +1,4 @@
+import "ts-polyfill";
 import { initializeApplicationModels } from "./controllers/initialize_application";
 import { generate_callElevator } from "./controllers/call_elevator";
 import { generate_isFloorCallable } from "./controllers/check_floor";
