@@ -40,12 +40,13 @@ export const pickFastestComingElevator = (floor: Floor, elevatorList: Array<Elev
     return elevator;
 };
 export const generate_callElevator = (floorList: Array<Floor>, elevatorList: Array<Elevator>): (floorIndex: number) => void => {
-    return (floorIndex: number): void => {
+    return (floorIndex: number): number => {
         const floor: Floor = floorList[floorIndex - 1];
 
         // 1. 엘리베이터 호출이 유효한지 검사
         if(isCallInvalid(floor, elevatorList) === true) {
-            return;
+            // 호출이 유효하지 않다면 -1 인덱스를 반환
+            return -1;
         }
 
         // 2. 엘리베이터 선발
@@ -56,5 +57,8 @@ export const generate_callElevator = (floorList: Array<Floor>, elevatorList: Arr
 
         // 4. Elevator 객체에 Floor 층으로 이동하는 Task 추가
         elevator.addDestination(floor);
+
+        // 5. 배정된 엘리베이터의 번호를 반환하며 마무리
+        return elevator.index;
     };
 };
