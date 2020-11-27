@@ -41,13 +41,15 @@ class Elevator extends BasicDataModel {
     protected _status: ElevatorStatus;
     protected _floorPosition: number;
     protected _timer: ReturnType<typeof setTimeout>;
+    protected _arrivalUpdate: (elevator: Elevator) => void;
 
-    constructor(index: number, currentFloorIndex: number = 1) {
+    constructor(index: number, arrivalUpdate: (elevator: Elevator) => void, currentFloorIndex: number = 1) {
         super(index);
 
         this._taskQueue = [];
         this._status = ElevatorStatus.pending;
         this._floorPosition = currentFloorIndex;
+        this._arrivalUpdate = arrivalUpdate;
     }
 
     get index(): number {
@@ -80,8 +82,11 @@ class Elevator extends BasicDataModel {
     }
 
     set status(newStatus: ElevatorStatus) {
-        this._status = newStatus;
-        this.updateViewModel();
+        if(this._status !== newStatus) {
+            this._status = newStatus;
+            this.updateViewModel();
+            this._arrivalUpdate(this);
+        }
     }
     set currentFloorIndex(newFloorPosition: number) {
         this._floorPosition = newFloorPosition;

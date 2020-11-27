@@ -13,6 +13,16 @@ export const renderFragment = (container: HTMLElement, viewList: Array<BasicView
 
     container.appendChild(fragment);
 };
+export const generate_elevatorArrivalUpdate = (floorList: Array<Floor>): (elevator: Elevator) => void => {
+    return (elevator: Elevator): void => {
+        const isValidFloor = (floor: Floor) => (
+            floor.index === elevator.currentFloorIndex &&
+            elevator.isStopped
+        );
+
+        floorList.filter(isValidFloor).forEach((floor: Floor) => floor.elevator = undefined);
+    };
+};
 
 interface initializerReturnType {
     floorList: Array<Floor>,
@@ -22,7 +32,8 @@ export const initializeApplicationModels = (floorCount: number, elevatorCount: n
     const floorList: Array<Floor> = new Array(floorCount).fill(undefined).map((_, i) => new Floor(i + 1));
     const floorViewList: Array<FloorView> = floorList.map(floor => new FloorView(floor));
 
-    const elevatorList: Array<Elevator> = new Array(elevatorCount).fill(undefined).map((_, i) => new Elevator(i + 1));
+    const arrivalUpdate = generate_elevatorArrivalUpdate(floorList);
+    const elevatorList: Array<Elevator> = new Array(elevatorCount).fill(undefined).map((_, i) => new Elevator(i + 1, arrivalUpdate));
     const elevatorViewList: Array<ElevatorView> = elevatorList.map(elevator => new ElevatorView(elevator));
 
     renderFragment(document.querySelector(floorListContainer), floorViewList.reverse());
