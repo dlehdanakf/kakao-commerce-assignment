@@ -93,13 +93,16 @@ class Elevator extends BasicDataModel {
         const tasks = generateMovingTasks(needToMove);
 
         this._taskQueue = [...this._taskQueue, ...tasks];
-        this.doTask();
+        if(this._timer === undefined) {
+            this.doTask();
+        }
     }
 
     protected doTask(): void {
         const task: TaskInterface = this._taskQueue.shift();
         if(task === undefined) {
             this.status = ElevatorStatus.pending;
+            this._timer = undefined;
             return;
         }
 
