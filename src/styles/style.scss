@@ -103,6 +103,7 @@ h3 {
       bottom: 0;
       left: 0;
       margin-top: -1px;
+      transition: bottom 1s linear;
 
       &[data-status="pending"]::before {
         background-color: $gray_background;
