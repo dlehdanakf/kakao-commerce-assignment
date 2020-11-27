@@ -25,10 +25,10 @@ class ElevatorView extends BasicViewModel {
         return (`<div class="elevator" data-status="${status}"></div>`);
     }
     public update(): void {
-        const { status, floorPosition } = this._elevator;
+        const { status, currentFloorIndex } = this._elevator;
 
         this._box.dataset.status = `${status}`;
-        this._box.style.bottom = `${(floorPosition - 1) * 100}px`;
+        this._box.style.bottom = `${(currentFloorIndex - 1) * 100}px`;
     }
 }
 

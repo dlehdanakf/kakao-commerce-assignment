@@ -2,30 +2,52 @@ import BasicDataModel from "./BasicDataModel";
 import Floor from "./Floor";
 
 enum TaskType {
-    MoveUP,
-    MoveDown,
+    Move,
     DoorOpen
 };
 enum ElevatorStatus {
     pending = 'pending',
     moving = 'moving',
-    opened = 'opened'
+    doorOpen = 'doorOpen'
 };
 
 interface TaskInterface {
     type: TaskType,
     move: -1 | 0 | 1
-}
+};
+interface TaskCollectionInterface {
+    moveUp: TaskInterface,
+    moveDown: TaskInterface,
+    doorOpen: TaskInterface
+};
+const TaskCollection: TaskCollectionInterface = {
+    moveUp: { type: TaskType.Move, move: 1 },
+    moveDown: { type: TaskType.Move, move: -1 },
+    doorOpen: { type: TaskType.DoorOpen, move: 0 }
+};
+
+const generateMovingTasks = (move: number): Array<TaskInterface> => {
+    const length = Math.abs(move);
+    const movingTask = move < 0 ? TaskCollection.moveDown : TaskCollection.moveUp;
+
+    const movingTasks = new Array(length).fill(movingTask);
+    const doorOpenTasks = new Array(3).fill(TaskCollection.doorOpen);
+
+    return [...movingTasks, ...doorOpenTasks];
+};
 
 class Elevator extends BasicDataModel {
     protected _taskQueue: Array<TaskInterface>;
     protected _status: ElevatorStatus;
     protected _floorPosition: number;
+    protected _timer: ReturnType<typeof setTimeout>;
 
-    constructor(index: number, floorPosition: number = 1) {
+    constructor(index: number, currentFloorIndex: number = 1) {
         super(index);
 
-        this._floorPosition = floorPosition;
+        this._taskQueue = [];
+        this._status = ElevatorStatus.pending;
+        this._floorPosition = currentFloorIndex;
     }
 
     get index(): number {
@@ -34,8 +56,14 @@ class Elevator extends BasicDataModel {
     get status(): ElevatorStatus {
         return this._status;
     }
-    get floorPosition(): number {
+    get currentFloorIndex(): number {
         return this._floorPosition;
+    }
+    get finalDestinationFloorIndex(): number {
+        return this.currentFloorIndex + this._taskQueue.reduce((acc: number, cur: TaskInterface) => acc + cur.move, 0);
+    }
+    get timeToCompleteTask(): number {
+        return this._taskQueue.length;
     }
 
     get isPending(): boolean {
@@ -45,7 +73,7 @@ class Elevator extends BasicDataModel {
         return this._status === ElevatorStatus.moving;
     }
     get isOpened(): boolean {
-        return this._status === ElevatorStatus.opened;
+        return this._status === ElevatorStatus.doorOpen;
     }
     get isStopped(): boolean {
         return this.isPending || this.isOpened;
@@ -55,13 +83,34 @@ class Elevator extends BasicDataModel {
         this._status = newStatus;
         this.updateViewModel();
     }
-    set floorPosition(newFloorPosition: number) {
+    set currentFloorIndex(newFloorPosition: number) {
         this._floorPosition = newFloorPosition;
         this.updateViewModel();
     }
 
     public addDestination(floor: Floor) {
+        const needToMove = floor.index - this.finalDestinationFloorIndex;
+        const tasks = generateMovingTasks(needToMove);
 
+        this._taskQueue = [...this._taskQueue, ...tasks];
+        this.doTask();
+    }
+
+    protected doTask(): void {
+        const task: TaskInterface = this._taskQueue.shift();
+        if(task === undefined) {
+            this.status = ElevatorStatus.pending;
+            return;
+        }
+
+        if(task.type === TaskType.Move) {
+            this.status = ElevatorStatus.moving;
+        } else {
+            this.status = ElevatorStatus.doorOpen;
+        }
+
+        this.currentFloorIndex = this.currentFloorIndex + task.move;
+        this._timer = setTimeout(() => this.doTask(), 1000);
     }
 }
 

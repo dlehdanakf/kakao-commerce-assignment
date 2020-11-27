@@ -110,7 +110,7 @@ h3 {
       &[data-status="moving"]::before {
         background: $blue;
       }
-      &[data-status="opened"]::before {
+      &[data-status="doorOpen"]::before {
         background: $yellow;
       }
       &[data-status="pending"]::after {
@@ -119,7 +119,7 @@ h3 {
       &[data-status="moving"]::after {
         content: '이동 중';
       }
-      &[data-status="opened"]::after {
+      &[data-status="doorOpen"]::after {
         content: '문 열림';
       }
 

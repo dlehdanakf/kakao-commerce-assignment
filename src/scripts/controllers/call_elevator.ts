@@ -5,7 +5,7 @@ export const isCallInvalid = (floor: Floor, elevatorList: Array<Elevator>) => {
     /**
      *  floor === undefined    : 전달받은 floor 파라미터가 유효하지 않은 객체일 경우
      *  floor.isElevatorComing : 해당 층에 이미 엘리베이터가 오는 중일 경우
-     *  elevatorList.some(...) : 해당 층에 엘리베이터가 pending 상태이거나 opened 상태일 경우
+     *  elevatorList.some(...) : 해당 층에 엘리베이터가 pending 상태이거나 doorOpen 상태일 경우
      *
      *  위 세 가지 중 하나라도 해당할 경우 엘리베이터 호출을 무시한다.
      */
@@ -13,7 +13,7 @@ export const isCallInvalid = (floor: Floor, elevatorList: Array<Elevator>) => {
     return (
         floor === undefined ||
         floor.isElevatorComing ||
-        elevatorList.some((elevator: Elevator) => elevator.floorPosition === floor.index || elevator.isStopped)
+        elevatorList.some((elevator: Elevator) => elevator.currentFloorIndex === floor.index && elevator.isStopped)
     );
 };
 export const pickFastestComingElevator = (floor: Floor, elevatorList: Array<Elevator>): Elevator => {
