@@ -40,10 +40,10 @@ class FloorView extends BasicViewModel {
         `);
     }
     public update(): void {
-        const isActive: boolean = this._floor.isActive;
+        const isElevatorComing: boolean = this._floor.isElevatorComing;
         const assignedElevatorIndex = this._floor.assignedElevatorIndex;
 
-        this._button.disabled = isActive;
+        this._button.disabled = isElevatorComing;
         this._input.value = assignedElevatorIndex;
     }
 }

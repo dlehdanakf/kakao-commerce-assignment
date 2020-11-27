@@ -12,11 +12,11 @@ class Floor extends BasicDataModel {
     get elevator(): Elevator {
         return this.elevator;
     }
-    get isActive(): boolean {
+    get isElevatorComing(): boolean {
         return this._elevator !== undefined;
     }
     get assignedElevatorIndex(): string {
-        if(this.isActive) {
+        if(this.isElevatorComing) {
             return `${this._elevator.index} 호기`;
         }
 
