@@ -1,4 +1,5 @@
 import BasicDataModel from "./BasicDataModel";
+import Floor from "./Floor";
 
 enum TaskType {
     MoveUP,
@@ -21,8 +22,10 @@ class Elevator extends BasicDataModel {
     protected _status: ElevatorStatus;
     protected _floorPosition: number;
 
-    constructor(index: number) {
+    constructor(index: number, floorPosition: number = 1) {
         super(index);
+
+        this._floorPosition = floorPosition;
     }
 
     get index(): number {
@@ -35,6 +38,19 @@ class Elevator extends BasicDataModel {
         return this._floorPosition;
     }
 
+    get isPending(): boolean {
+        return this._status === ElevatorStatus.pending;
+    }
+    get isMoving(): boolean {
+        return this._status === ElevatorStatus.moving;
+    }
+    get isOpened(): boolean {
+        return this._status === ElevatorStatus.opened;
+    }
+    get isStopped(): boolean {
+        return this.isPending || this.isOpened;
+    }
+
     set status(newStatus: ElevatorStatus) {
         this._status = newStatus;
         this.updateViewModel();
@@ -42,6 +58,10 @@ class Elevator extends BasicDataModel {
     set floorPosition(newFloorPosition: number) {
         this._floorPosition = newFloorPosition;
         this.updateViewModel();
+    }
+
+    public addDestination(floor: Floor) {
+
     }
 }
 

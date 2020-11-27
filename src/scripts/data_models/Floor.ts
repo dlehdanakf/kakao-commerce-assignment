@@ -27,6 +27,9 @@ class Floor extends BasicDataModel {
         this._elevator = newElevator;
         this.updateViewModel();
     }
+    public assignElevator(elevator: Elevator) {
+        this.elevator = elevator;
+    }
 }
 
 export default Floor;

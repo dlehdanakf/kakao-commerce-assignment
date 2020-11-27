@@ -12,7 +12,9 @@ abstract class BasicDataModel {
         this._viewModel = this._viewModel || viewModel;
     }
     protected updateViewModel() {
-        this._viewModel.update();
+        if(this._viewModel !== undefined) {
+            this._viewModel.update();
+        }
     }
 
     get index(): number {
