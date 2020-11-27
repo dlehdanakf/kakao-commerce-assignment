@@ -1,4 +1,3 @@
-import "ts-polyfill";
 import { initializeApplicationModels } from "./controllers/initialize_application";
 import { generate_callElevator } from "./controllers/call_elevator";
 import { generate_isFloorCallable } from "./controllers/check_floor";
@@ -55,6 +54,9 @@ const runApplication = (form: VariableFormInterface) => {
 };
 
 document.addEventListener(`DOMContentLoaded`, () => {
+    const { platform } = navigator;
+    document.body.dataset.platform = `${platform}`;
+
     document.variable_form.addEventListener(`submit`, e => {
         e.preventDefault();
 

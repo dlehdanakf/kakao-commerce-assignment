@@ -7,6 +7,21 @@
         <meta name="description" content="카카오커머스 프론트엔드 개발자 채용 과제" />
         <link rel="stylesheet" href="dist/style.css" />
         <script src="dist/script.js"></script>
+        <style>
+            /* Windows Chrome CSS HACK */
+            @media screen and (-webkit-min-device-pixel-ratio:0) {
+                body[data-platform="Win32"] #elevator-list {
+                    bottom: -16px !important;
+                }
+            }
+
+            /* IE 10 & 11 CSS HACK */
+            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+                #elevator-list {
+                    bottom: -16px !important;
+                }
+            }
+        </style>
     </head>
     <body>
         <h1>과제 1. 화물 엘리베이터</h1>
