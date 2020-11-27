@@ -19,7 +19,11 @@ module.exports = (mode = `development`) => {
 				{
 					test: /\.ts$/,
 					exclude: /node_modules/,
-					use: [ `ts-loader` ]
+					loader: `awesome-typescript-loader`,
+					options: {
+						useBabel: true,
+						babelCore: `@babel/core`
+					}
 				},
 				{
 					test: /\.scss$/,

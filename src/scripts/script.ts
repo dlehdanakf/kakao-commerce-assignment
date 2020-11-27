@@ -1,3 +1,15 @@
+/** IE10 polyfill */
+import "core-js-bundle";
+if (!('remove' in Element.prototype)) {
+    // @ts-ignore IE10 에는 HTMLElement remove 메소드가 없어서 추가 polyfill 코드 작성
+    Element.prototype.remove = function() {
+        if (this.parentNode) {
+            this.parentNode.removeChild(this);
+        }
+    };
+}
+/**  */
+
 import { initializeApplicationModels } from "./controllers/initialize_application";
 import { generate_callElevator } from "./controllers/call_elevator";
 import { generate_isFloorCallable } from "./controllers/check_floor";
