@@ -39,7 +39,7 @@ export const generateMovingTasks = (move: number): Array<TaskInterface> => {
 class Elevator extends BasicDataModel {
     protected _taskQueue: Array<TaskInterface>;
     protected _status: ElevatorStatus;
-    protected _floorPosition: number;
+    protected _floorIndex: number;
     protected _timer: ReturnType<typeof setTimeout>;
     protected _arrivalUpdate: (elevator: Elevator) => void;
 
@@ -48,7 +48,7 @@ class Elevator extends BasicDataModel {
 
         this._taskQueue = [];
         this._status = ElevatorStatus.pending;
-        this._floorPosition = currentFloorIndex;
+        this._floorIndex = currentFloorIndex;
         this._arrivalUpdate = arrivalUpdate;
     }
 
@@ -59,7 +59,7 @@ class Elevator extends BasicDataModel {
         return this._status;
     }
     get currentFloorIndex(): number {
-        return this._floorPosition;
+        return this._floorIndex;
     }
     get finalDestinationFloorIndex(): number {
         return this.currentFloorIndex + this._taskQueue.reduce((acc: number, cur: TaskInterface) => acc + cur.move, 0);
@@ -89,7 +89,7 @@ class Elevator extends BasicDataModel {
         }
     }
     set currentFloorIndex(newFloorPosition: number) {
-        this._floorPosition = newFloorPosition;
+        this._floorIndex = newFloorPosition;
         this.updateViewModel();
     }
 
