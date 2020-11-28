@@ -1,11 +1,14 @@
-import Elevator, { TaskInterface, TaskCollection, generateMovingTasks } from "./Elevator";
+import Elevator, { ElevatorStatus, TaskInterface, TaskCollection, generateMovingTasks } from "./Elevator";
 import Floor from "./Floor";
 
 export class ElevatorTest extends Elevator {
-    constructor() {
-        super(1, ()=>{}, 1);
+    constructor(index: number = 1, floorIndex: number = 1) {
+        super(index, ()=>{}, floorIndex);
     }
 
+    set status(newStatus: ElevatorStatus) {
+        this._status = newStatus;
+    }
     set floorIndex(floorIndex: number) {
         this._floorIndex = floorIndex;
     }
@@ -15,7 +18,7 @@ export class ElevatorTest extends Elevator {
 }
 
 describe("generateMovingTasks 함수 동작 테스트", () => {
-    test("위로 3층 올라가는 task 생성 테스트", () => {
+    test("위로 3층 올라가는 task 생성", () => {
         expect(generateMovingTasks(3)).toEqual([
             TaskCollection.moveUp,
             TaskCollection.moveUp,
@@ -25,7 +28,7 @@ describe("generateMovingTasks 함수 동작 테스트", () => {
             TaskCollection.doorOpen
         ]);
     });
-    test("아래로 2층 올라가는 task 생성 테스트", () => {
+    test("아래로 2층 올라가는 task 생성", () => {
         expect(generateMovingTasks(-2)).toEqual([
             TaskCollection.moveDown,
             TaskCollection.moveDown,
@@ -34,7 +37,7 @@ describe("generateMovingTasks 함수 동작 테스트", () => {
             TaskCollection.doorOpen
         ]);
     });
-    test("움직이지 않을 때 테스트", () => {
+    test("움직이지 않을 때", () => {
         expect(generateMovingTasks(0)).toEqual([ ]);
     });
 });
