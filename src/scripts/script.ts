@@ -49,7 +49,7 @@ const runApplication = (form: VariableFormInterface) => {
     const { floorList, elevatorList } = initializeApplicationModels(+floorCount, +elevatorCount);
     window.elevator = {
         callElevator: generate_callElevator(floorList, elevatorList),
-        isFloorCallable: generate_isFloorCallable(floorList, elevatorList)
+        isFloorCallable: generate_isFloorCallable(floorList)
     };
 
     document.variable_form.addEventListener(`reset`, function eventListener() {
