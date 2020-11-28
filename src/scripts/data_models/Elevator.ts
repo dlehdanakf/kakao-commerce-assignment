@@ -1,32 +1,32 @@
 import BasicDataModel from "./BasicDataModel";
 import Floor from "./Floor";
 
-enum TaskType {
+export enum TaskType {
     Move,
     DoorOpen
 };
-enum ElevatorStatus {
+export enum ElevatorStatus {
     pending = 'pending',
     moving = 'moving',
     doorOpen = 'doorOpen'
 };
 
-interface TaskInterface {
+export interface TaskInterface {
     type: TaskType,
     move: -1 | 0 | 1
 };
-interface TaskCollectionInterface {
+export interface TaskCollectionInterface {
     moveUp: TaskInterface,
     moveDown: TaskInterface,
     doorOpen: TaskInterface
 };
-const TaskCollection: TaskCollectionInterface = {
+export const TaskCollection: TaskCollectionInterface = {
     moveUp: { type: TaskType.Move, move: 1 },
     moveDown: { type: TaskType.Move, move: -1 },
     doorOpen: { type: TaskType.DoorOpen, move: 0 }
 };
 
-const generateMovingTasks = (move: number): Array<TaskInterface> => {
+export const generateMovingTasks = (move: number): Array<TaskInterface> => {
     const length = Math.abs(move);
     const movingTask = move < 0 ? TaskCollection.moveDown : TaskCollection.moveUp;
 
