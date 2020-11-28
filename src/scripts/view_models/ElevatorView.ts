@@ -27,8 +27,9 @@ class ElevatorView extends BasicViewModel {
     public update(): void {
         const { status, currentFloorIndex } = this._elevator;
 
-        this._box.dataset.status = `${status}`;
         this._box.style.transform = `translate(0, -${(currentFloorIndex - 1) * 100}px)`;
+        if(this._box.dataset) this._box.dataset.status = `${status}`;
+        else this._box.setAttribute(`data-status`, `${status}`);
     }
 
     destruct() {

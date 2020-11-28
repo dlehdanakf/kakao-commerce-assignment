@@ -67,7 +67,8 @@ const runApplication = (form: VariableFormInterface) => {
 
 document.addEventListener(`DOMContentLoaded`, () => {
     const { platform } = navigator;
-    document.body.dataset.platform = `${platform}`;
+    if(document.body.dataset) document.body.dataset.platform = `${platform}`;
+    else document.body.setAttribute(`data-platform`, `${platform}`);
 
     document.variable_form.addEventListener(`submit`, e => {
         e.preventDefault();
