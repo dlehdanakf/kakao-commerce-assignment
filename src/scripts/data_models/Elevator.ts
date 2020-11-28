@@ -27,6 +27,10 @@ export const TaskCollection: TaskCollectionInterface = {
 };
 
 export const generateMovingTasks = (move: number): Array<TaskInterface> => {
+    if(move === 0) {
+        return [];
+    }
+
     const length = Math.abs(move);
     const movingTask = move < 0 ? TaskCollection.moveDown : TaskCollection.moveUp;
 
