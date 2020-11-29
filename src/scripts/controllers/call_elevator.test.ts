@@ -10,16 +10,19 @@ describe("isCallInvalid 함수 동작 테스트", () => {
         const floor = new Floor(1);
         expect(isCallInvalid(floor, elevatorList)).toBe(true);
     });
+
     test("( 1, 1, 1 ) 일 때 3층에서 호출", () => {
         const floor = new Floor(3);
         expect(isCallInvalid(floor, elevatorList)).toBe(false);
     });
+
     test("( 2(Opened), 1, 1 ) 일 때 3층에서 호출", () => {
         elevatorList[0].status = ElevatorStatus.doorOpen;
 
         const floor = new Floor(3);
         expect(isCallInvalid(floor, elevatorList)).toBe(false);
     });
+
     test("( 5(Moving), 1, 1 ) 일 때 2층(1호기 배정)에서 호출", () => {
         elevatorList[0].status = ElevatorStatus.moving;
 
