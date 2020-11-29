@@ -10,7 +10,7 @@ if (!('remove' in Element.prototype)) {
 }
 /** ----------------------------------------------------------------------  */
 
-import { initializeApplicationModels } from "./controllers/initialize_application";
+import { initializeApplicationModels } from "./controllers/initialize";
 import { generate_callElevator } from "./controllers/call_elevator";
 import { generate_isFloorCallable } from "./controllers/check_floor";
 
